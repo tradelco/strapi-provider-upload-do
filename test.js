@@ -41,5 +41,8 @@ const { toWebp } = require('./lib');
   assert.equal(thumb.provider_metadata, undefined, 'formats get no original');
   await prov.delete(main);
   assert.deepEqual(calls.filter(c => c.startsWith('del:')).length, 2);
+  const nodot = { name: 'n.png', hash: 'nodot.', ext: 'png', mime: 'image/png', buffer: png };
+  await prov.upload(nodot);
+  assert.ok(nodot.provider_metadata.original.key.endsWith('.png'), 'original key keeps a dot');
   console.log('flow ok');
 })();
