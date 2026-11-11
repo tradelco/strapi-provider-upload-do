@@ -1,5 +1,5 @@
 {
-  "name": "strapi-provider-upload-do",
+  "name": "@tradelco/strapi-provider-upload-do",
   "version": "3.7.0",
   "description": "Digital ocean spaces provider for Strapi upload plugin",
   "homepage": "http://strapi.io",
@@ -46,5 +46,13 @@
   },
   "scripts": {
     "test": "node test.js"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "lib",
+    "LICENSE.md",
+    "README.md"
+  ]
 }

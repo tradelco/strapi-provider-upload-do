@@ -3,6 +3,13 @@
 
 This provider will upload to the space using the AWS S3 API.
 
+Published to GitHub Packages. Add to `.npmrc` (token with `read:packages`):
+
+```
+@tradelco:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}
+```
+
 ## Parameters
 - **key** : [Space access key](https://cloud.digitalocean.com/account/api/tokens)
 - **secret** : [Space access secret](https://cloud.digitalocean.com/account/api/tokens)
@@ -16,13 +23,13 @@ This provider will upload to the space using the AWS S3 API.
 1. Install this package
 
 ```bash
-npm i strapi-provider-upload-do
+npm i @tradelco/strapi-provider-upload-do
 ```
 ```bash
-yarn add strapi-provider-upload-do
+yarn add @tradelco/strapi-provider-upload-do
 ```
 ```bash
-pnpm add strapi-provider-upload-do
+pnpm add @tradelco/strapi-provider-upload-do
 ```
 
 2. Create or update config in `./config/plugins.js` with content
@@ -32,7 +39,7 @@ module.exports = ({env}) => ({
   // ...
   upload: {
     config: {
-      provider: "strapi-provider-upload-do", 
+      provider: "@tradelco/strapi-provider-upload-do", 
       providerOptions: {
         key: env('DO_SPACE_ACCESS_KEY'),
         secret: env('DO_SPACE_SECRET_KEY'),
