@@ -17,6 +17,17 @@ const { toWebp } = require('./lib');
   assert.equal(await toWebp(svg, 80), null);
   assert.equal(svg.ext, '.svg');
 
+  // PNG bytes mislabelled as webp (Strapi race on format files): must still become real webp
+  const lie = { name: 'small_x', mime: 'image/webp', ext: '.webp', buffer: png };
+  const lieOrig = await toWebp(lie, 80);
+  assert.equal(lie.buffer.slice(8, 12).toString(), 'WEBP');
+  assert.equal(lie.name, 'small_x.webp');
+  assert.equal(lie.sizeInBytes, lie.buffer.length);
+  assert.equal(lieOrig.ext, '.png');
+  // genuine webp passes through untouched
+  const real = { name: 'r.webp', mime: 'image/webp', ext: '.webp', buffer: lie.buffer };
+  assert.equal(await toWebp(real, 80), null);
+
   const bad = { name: 'b.png', mime: 'image/png', ext: '.png', buffer: Buffer.from('not an image') };
   assert.equal(await toWebp(bad, 80), null);
   assert.equal(bad.ext, '.png');
