@@ -84,3 +84,17 @@ Parameter `DO_SPACE_DIRECTORY` and `DO_SPACE_CDN` is optional and you can ommit 
 <a href="https://github.com/tommasongr"><img src="https://avatars.githubusercontent.com/u/25225746?v=4" title="tommasongr" width="80" height="80"></a>
 <a href="https://github.com/maxep"><img src="https://avatars.githubusercontent.com/u/6815992?v=4" title="maxep" width="80" height="80"></a>
 <a href="https://github.com/anwarpro"><img src="https://avatars.githubusercontent.com/u/47409922?v=4" title="maxep" width="80" height="80"></a>
+
+## WebP conversion and originals (tradelco fork)
+
+JPEG/PNG uploads are converted to WebP before they reach the space; SVG, GIF, WebP and non-images pass through. Needs `sharp` (peer dependency; Strapi already ships it, add it to the project's own dependencies under pnpm).
+
+`providerOptions`:
+
+| option | default | meaning |
+| --- | --- | --- |
+| `webp` | `true` | convert JPEG/PNG to WebP |
+| `webpQuality` | `80` | WebP quality |
+| `keepOriginals` | `true` | also store the unconverted file under `originals/` and link it on the same media document as `provider_metadata.original` (`key`, `url`, `mime`, `ext`). Only the main file, not thumbnail/responsive formats. |
+
+If conversion fails the original is uploaded as is. Deleting a media file also deletes its original.
