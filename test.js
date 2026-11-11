@@ -9,6 +9,7 @@ const { toWebp } = require('./lib');
   assert.equal(file.mime, 'image/webp');
   assert.equal(file.ext, '.webp');
   assert.equal(file.buffer.slice(8, 12).toString(), 'WEBP');
+  assert.equal(file.name, 'a.webp');
   assert.equal(orig.ext, '.png');
   assert.ok(orig.buffer.equals(png), 'original untouched');
 
@@ -44,5 +45,9 @@ const { toWebp } = require('./lib');
   const nodot = { name: 'n.png', hash: 'nodot.', ext: 'png', mime: 'image/png', buffer: png };
   await prov.upload(nodot);
   assert.ok(nodot.provider_metadata.original.key.endsWith('.png'), 'original key keeps a dot');
+  assert.equal(nodot.name, 'n.webp');
+  const bare = { name: 'qo115-1', hash: 'bare.', ext: 'png', mime: 'image/png', buffer: png };
+  await prov.upload(bare);
+  assert.equal(bare.name, 'qo115-1.webp');
   console.log('flow ok');
 })();

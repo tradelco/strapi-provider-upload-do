@@ -97,4 +97,4 @@ JPEG/PNG uploads are converted to WebP before they reach the space; SVG, GIF, We
 | `webpQuality` | `80` | WebP quality |
 | `keepOriginals` | `true` | also store the unconverted file under `originals/` and link it on the same media document as `provider_metadata.original` (`key`, `url`, `mime`, `ext`). Only the main file, not thumbnail/responsive formats. |
 
-If conversion fails the original is uploaded as is. Deleting a media file also deletes its original.
+The stored file name gets the `.webp` extension (`qo115-1` and `a.png` both become `….webp`). If conversion fails the original is uploaded as is. Deleting a media file also deletes its original.
